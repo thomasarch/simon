@@ -40,14 +40,13 @@ body {
 	cursor: pointer;
 }
 
-.game-container .piece {
-	cursor: pointer;
-}
-
 .piece {
 	width: 200px;
 	height: 200px;
-	/*transition: background-color 1.5s;*/
+}
+
+.clickable {
+	cursor: pointer;
 }
 
 .wait-for-sequence {

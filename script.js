@@ -7,6 +7,7 @@ let sequence = [];
 let step = 0;
 let acceptUserInput = false;
 let gameRunning = 'first';
+let interval = 500;
 
 function randomNum(min, max) {
 	return Math.floor(Math.random() * ((max + 1) - min) + min);
@@ -25,7 +26,7 @@ function flashPiece(number) {
 	let piece = pieces[number];
 	piece.classList.add('bright');
 	playFrequency(tones[number]);
-	setTimeout(() => { piece.classList.remove('bright') }, 200);
+	setTimeout(() => { piece.classList.remove('bright') }, interval * 0.66);
 }
 
 function sleep(ms) {
@@ -36,23 +37,27 @@ function sleep(ms) {
 
 async function playSequence() {
 	for (let sequenceStep of sequence) {
-		await sleep(500);
-
+		await sleep(interval);
 		flashPiece(sequence[step++]);
 	}
 	toggleInput();
 	step = 0;
+	pieces.forEach(piece => { 
+		piece.classList.toggle('wait-for-sequence');
+		piece.classList.toggle('clickable');
+	});
 }
 
 function toggleInput() {
 	acceptUserInput = !acceptUserInput;
-	pieces.forEach(piece => { piece.classList.toggle('wait-for-sequence') });
+	// pieces.forEach(piece => { piece.classList.toggle('wait-for-sequence') });
 }
 
 
 function addToSequence() {
+	pieces.forEach(piece => { piece.classList.toggle('wait-for-sequence') });
 	sequence.push(randomNum(0, 3))
-	playSequence();
+	setTimeout(() => { playSequence() }, 500);
 }
 
 function gameover() {
@@ -69,8 +74,6 @@ function greyShift(time) {
 	});	
 }
 
-
-
 function pressedPiece() {
 	if (acceptUserInput == true) {
 		flashPiece(this.dataset.number);
@@ -78,9 +81,17 @@ function pressedPiece() {
 			if (step == sequence.length) {
 				step = 0;
 				toggleInput();
-				setTimeout(() => { addToSequence() }, 500);
+				pieces.forEach(piece => { piece.classList.toggle('clickable') });
+				if (sequence.length < 49) {
+					interval = 500 - ((sequence.length + 1) * 7.5)
+				} else {
+					interval = 125;
+				}
+
+				addToSequence();
 			}
 		} else {
+			pieces.forEach(piece => { piece.classList.toggle('clickable') });
 			gameover();
 			toggleInput();
 		}	
@@ -97,14 +108,12 @@ function playFrequency(frequency) {
 	beep.start(0);
 	setTimeout(() => { 
 		gain.gain.exponentialRampToValueAtTime(0.00001, audioContext.currentTime + 0.04)
-	}, 250)
+	}, interval * 0.66)
 
 }
-
 
 startButton.addEventListener('click', startGame);
 
 pieces.forEach(piece => {
-	piece.classList.toggle('wait-for-sequence')
 	piece.addEventListener('click', pressedPiece)
 });
