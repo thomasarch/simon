@@ -1,0 +1,72 @@
+* {
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+}
+
+.game-container .piece {
+	cursor: pointer;
+}
+
+.piece {
+	width: 100px;
+	height: 100px;
+	/*transition: background-color 1.5s;*/
+}
+
+.wait-for-sequence {
+	cursor: progress !important;
+}
+
+.half {
+	display: flex;
+}
+
+#top-left {
+	border-top-left-radius: 100%
+}
+
+#top-right {
+	border-top-right-radius: 100%;
+}
+
+#bottom-right {
+	border-bottom-right-radius: 100%;
+}
+
+#bottom-left {
+	border-bottom-left-radius: 100%; 
+}
+
+.red {
+	background-color: #DB4437;
+}
+
+.blue {
+	background-color: #4285F4;
+}
+
+.green {
+	background-color: #0F9D58;
+}
+
+.yellow {
+	background-color: #F4B400;
+}
+
+.bright {
+	filter: brightness(200%)
+}
+
+.grey {
+	background-color: grey;
+}
+
+
+
