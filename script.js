@@ -13,7 +13,12 @@ function randomNum(min, max) {
 	return Math.floor(Math.random() * ((max + 1) - min) + min);
 }
 
+function startButtonPressed() {
+	startButton.classList.add('start-button-pressed');
+}
+
 function startGame() {
+	startButton.classList.remove('start-button-pressed');
 	audioContext.resume();
 	if (gameRunning != true) {
 		gameRunning != 'first' ? greyShift(0.25) : '';
@@ -112,7 +117,8 @@ function playFrequency(frequency) {
 
 }
 
-startButton.addEventListener('click', startGame);
+startButton.addEventListener('mousedown', startButtonPressed);
+startButton.addEventListener('mouseup', startGame);
 
 pieces.forEach(piece => {
 	piece.addEventListener('click', pressedPiece)
