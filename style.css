@@ -10,13 +10,43 @@ body {
 	height: 100vh;
 }
 
+.game-container {
+	position: relative;
+	align-items: center;
+	justify-content: center;
+}
+
+#center-circle {
+	position: absolute;
+	left: 30%;
+	top: 30%;
+	background-color: #222;
+	width: 40%;
+	height: 40%;
+	border-radius: 50%;
+	z-index: 1;
+}
+
+#start-button {
+	position: absolute;
+	left: 47%;
+	top: 47%;
+	background-color: green;
+	width: 6%;
+	height: 6%;
+	border-radius: 50%;
+	z-index: 2;
+	border: 1px solid white;
+	cursor: pointer;
+}
+
 .game-container .piece {
 	cursor: pointer;
 }
 
 .piece {
-	width: 100px;
-	height: 100px;
+	width: 200px;
+	height: 200px;
 	/*transition: background-color 1.5s;*/
 }
 
