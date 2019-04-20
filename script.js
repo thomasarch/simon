@@ -1,6 +1,18 @@
 const pieces = document.querySelectorAll('.piece');
 const gameContainer = document.querySelector('.game-container');
-const audioContext = new AudioContext();
+
+var AudioContext = window.AudioContext
+	|| window.webkitAudioContext // Safari and old versions of Chrome
+    || false;
+
+if (AudioContext) {
+	var ctx = new AudioContext;
+} else {
+	alert('sorry');
+}
+
+
+
 const startButton = document.querySelector('#start-button');
 const tones = [164.813, 440, 277.183, 329.628]
 let sequence = [];
@@ -19,7 +31,7 @@ function startButtonPressed() {
 
 function startGame() {
 	startButton.classList.remove('start-button-pressed');
-	audioContext.resume();
+	ctx.resume();
 	if (gameRunning != true) {
 		gameRunning != 'first' ? greyShift(0.25) : '';
 		gameRunning = true;	
@@ -104,15 +116,15 @@ function pressedPiece() {
 }
 
 function playFrequency(frequency) {
-	const beep = audioContext.createOscillator();
-	const gain = audioContext.createGain();
+	const beep = ctx.createOscillator();
+	const gain = ctx.createGain();
 	beep.connect(gain);
-	gain.connect(audioContext.destination);
-	gain.gain.setValueAtTime(0.05, audioContext.currentTime);
+	gain.connect(ctx.destination);
+	gain.gain.setValueAtTime(0.05, ctx.currentTime);
 	beep.frequency.value = frequency
 	beep.start(0);
 	setTimeout(() => { 
-		gain.gain.exponentialRampToValueAtTime(0.00001, audioContext.currentTime + 0.04)
+		gain.gain.exponentialRampToValueAtTime(0.00001, ctx.currentTime + 0.04)
 	}, interval * 0.66)
 
 }
