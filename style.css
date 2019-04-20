@@ -11,7 +11,57 @@ body {
 	background-color: #efefef;
 }
 
+/*mobile*/
+@media only screen 
+  and (min-device-width: 320px) 
+  and (max-device-width: 480px)
+  and (-webkit-min-device-pixel-ratio: 2) {
+	.game-container {
+		width: 90vw;
+		height: 90vw;
+	}
+	.piece {
+		width: 50%;
+		height: 100%;
+	}
+
+	.half {
+		width: 100%;
+		height: 50%;
+		display: flex;
+	}
+}
+
+/*tablet*/
+@media only screen 
+  and (min-device-width: 768px) 
+  and (max-device-width: 1024px) 
+  and (-webkit-min-device-pixel-ratio: 1) {
+  	.game-container {
+		width: 90vw;
+		height: 90vw;
+	}
+	.piece {
+		width: 50%;
+		height: 100%;
+	}
+
+	.half {
+		width: 100%;
+		height: 50%;
+		display: flex;
+	}
+}
+
+@media only screen and (min-device-width: 769px) {
+	.piece {
+		width: 200px;
+		height: 200px;
+	}
+}
+
 .game-container {
+	margin: 20px;
 	position: relative;
 	align-items: center;
 	justify-content: center;
@@ -43,11 +93,6 @@ body {
 
 .start-button-pressed {
 	box-shadow: inset 0 2px 4px #444;
-}
-
-.piece {
-	width: 200px;
-	height: 200px;
 }
 
 .clickable {

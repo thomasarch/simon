@@ -120,6 +120,9 @@ function playFrequency(frequency) {
 startButton.addEventListener('mousedown', startButtonPressed);
 startButton.addEventListener('mouseup', startGame);
 
+startButton.addEventListener('touchstart', startButtonPressed);
+startButton.addEventListener('touchend', startGame);
+
 pieces.forEach(piece => {
 	piece.addEventListener('click', pressedPiece)
 });
